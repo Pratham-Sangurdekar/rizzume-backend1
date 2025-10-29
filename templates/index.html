@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+
+<title>Rizzume – Resume Matcher</title>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f5f8;
+      color: #222;
+      padding: 2rem;
+    }
+    h2 {
+      text-align: center;
+      color: #ba2dc7;
+    }
+    h1 {
+      text-align: center;
+      color: #ba2dc7;
+      margin-top: 2rem;
+    }
+    form {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    textarea {
+      width: 60%;
+      height: 100px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: none;
+      font-size: 1rem;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      background-color: #ba2dc7;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #c72d7c;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 15px 25px;
+      margin: 20px auto;
+      width: 70%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .score {
+      color: #888;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>RRR 🦁</h1>
+  <h2>Rizzume - Resume Matching aid for Recruiters </h2>
+  <form method="POST">
+    <textarea name="query" placeholder="Enter job description or candidate requirements here...">{{ query }}</textarea><br>
+    <button type="submit">Find Matches</button>
+  </form>
+
+  {% if results %}
+    <h2 style="text-align:center;">Top Matching Resumes</h2>
+    {% for r in results %}
+      <div class="card">
+        <h3>{{ r.name }} – <em>{{ r.domain }}</em></h3>
+        <p><strong>Email:</strong> {{ r.email }}</p>
+        <p><strong>Summary:</strong> {{ r.summary }}</p>
+        <p><strong>Skills:</strong> {{ r.skills }}</p>
+        <p><strong>Experience:</strong> {{ r.experience }}</p>
+        <p><strong>Education:</strong> {{ r.education }}</p>
+        <p class="score"><strong>Similarity Score:</strong> {{ r.score }}</p>
+      </div>
+    {% endfor %}
+  {% endif %}
+</body>
+</html>
